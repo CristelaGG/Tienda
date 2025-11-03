@@ -1,0 +1,156 @@
+/* Fuente base */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #fffaf7;
+    color: #333;
+}
+
+/* Encabezado */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: #fcefe8;
+    border-bottom: 2px solid #e6d9d1;
+}
+
+.logo {
+    text-align: center;
+}
+.nosotros{
+    text-align: center;
+}
+
+.logo img {
+    width: 230px;
+    height: 230px;
+}
+
+.logo h1 {
+    margin: 5px 0 0;
+    font-family: 'Great Vibes', cursive;
+    font-size: 36px;
+}
+
+.slogan {
+    font-size: 20px;
+    color: #555;
+    font-style: italic;
+}
+.noso_text{
+    font-size: 20px;
+    color: #555
+    
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #d77a61;
+}
+
+/* Iconos */
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icons a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 8px;
+}
+
+.icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.hero h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 64px;
+    color: #333;
+}
+
+/* Cards de estilos */
+.styles {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 20px 60px;
+}
+.styles_c {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 15px 20px;
+}
+.styles_b {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+    padding: 15px 20px;
+}
+
+.thumb{height:200px;border-radius:30px;overflow:hidden;background:#f9f3f0}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.title{font-family:Montserrat;font-size:20px;margin:0}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.price{font-weight:700;color:var(--accent-green)}
+.stock{font-size:12px;color:var(--muted)}
+.actions{margin-top:auto;display:flex;gap:8px}
+.small-btn{padding:15px 17px;border-radius:15px;border:0;cursor:pointer;font-weight:600}
+.add{background:var(--accent-blue);color:#f28050}
+.buy{background:var(--accent-red);color:#f28050}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+
+.card {
+    background-color: #f9f3f0;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card h3 {
+    margin: 10px 0 0;
+    font-size: 18px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #fcefe8;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.btn-back{margin-top:40px;padding:20px 32px;border-radius:20px;color:rgb(226, 127, 40);font-weight:1000;text-align:center;align-items:center}
