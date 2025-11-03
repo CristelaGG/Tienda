@@ -39,10 +39,9 @@ header {
     color: #555;
     font-style: italic;
 }
-.noso_text{
+.noso_text {
     font-size: 20px;
-    color: #555
-    
+    color: #555;
 }
 nav ul {
     list-style: none;
@@ -111,17 +110,72 @@ nav ul li a:hover {
     padding: 15px 20px;
 }
 
-.thumb{height:200px;border-radius:30px;overflow:hidden;background:#f9f3f0}
-.thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.title{font-family:Montserrat;font-size:20px;margin:0}
-.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.price{font-weight:700;color:var(--accent-green)}
-.stock{font-size:12px;color:var(--muted)}
-.actions{margin-top:auto;display:flex;gap:8px}
-.small-btn{padding:15px 17px;border-radius:15px;border:0;cursor:pointer;font-weight:600}
-.add{background:var(--accent-blue);color:#f28050}
-.buy{background:var(--accent-red);color:#f28050}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.thumb {
+    height: 200px;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #f9f3f0;
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.title {
+    font-family: Montserrat;
+    font-size: 20px;
+    margin: 0;
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.price {
+    font-weight: 700;
+    color: var(--accent-green);
+}
+
+.stock {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.actions {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.small-btn {
+    padding: 15px 17px;
+    border-radius: 15px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.add {
+    background: var(--accent-blue);
+    color: #f28050;
+}
+
+.buy {
+    background: var(--accent-red);
+    color: #f28050;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
 
 .card {
     background-color: #f9f3f0;
@@ -153,4 +207,104 @@ footer {
     font-size: 14px;
     margin-top: 30px;
 }
-.btn-back{margin-top:40px;padding:20px 32px;border-radius:20px;color:rgb(226, 127, 40);font-weight:1000;text-align:center;align-items:center}
+.btn-back {
+    margin-top: 40px;
+    padding: 20px 32px;
+    border-radius: 20px;
+    color: rgb(226, 127, 40);
+    font-weight: 1000;
+    text-align: center;
+    align-items: center;
+}
+
+/* LOGIN PAGE */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 50vh;
+    margin-top: 20px;
+}
+
+.logo-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 40px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.login-box {
+    background-color: #fcefe8;
+    padding: 30px;
+    border-radius: 12px;
+    width: 350px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.login-box h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-box label {
+    font-size: 14px;
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    color: #555;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #e6d9d1;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.login-box input:focus {
+    border-color: #d77a61;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(215, 122, 97, 0.1);
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #d77a61;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background-color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: #c56a51;
+}
+
+.extra-text {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.extra-text a {
+    color: #d77a61;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.extra-text a:hover {
+    text-decoration: underline;
+}
