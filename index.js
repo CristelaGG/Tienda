@@ -7,11 +7,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Configurar middleware para archivos estáticos
-app.use(express.static(path.join(__dirname, 'img')));
-app.use(express.static(path.join(__dirname, 'img_colorido')));
-app.use(express.static(path.join(__dirname, 'img_gotico')));
-app.use(express.static(path.join(__dirname, 'img_hippie')));
-app.use(express.static(path.join(__dirname, 'img_minimalista')));
+// Montamos cada carpeta de imágenes bajo su propio prefijo para que las rutas en las vistas coincidan.
+app.use('/img', express.static(path.join(__dirname, 'img')));
+// Mantener 'views' estático para acceder a styles.css con ruta /styles.css
 app.use(express.static(path.join(__dirname, 'views'))); // Para acceder a styles.css
 
 // Ruta principal
