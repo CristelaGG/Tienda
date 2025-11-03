@@ -49,3 +49,8 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
+powershell -Command "Start-Service ssh-agent"
+ssh-add %USERPROFILE%\.ssh\id_ed25519
+ssh-add -l
+git push -u origin main
