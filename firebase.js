@@ -6,19 +6,31 @@ let _db;
 function initFirebase() {
   if (!_db) {
     try {
-      // Intenta cargar el archivo de credenciales
-      const serviceAccount = require(path.join(__dirname, 'serviceAccountKey.json'));
+      let serviceAccount;
+      
+      // En producción (Render), usar variable de entorno
+      if (process.env.FIREBASE_CONFIG) {
+        serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+        console.log('Usando credenciales de Firebase desde variable de entorno');
+      } else {
+        // En desarrollo local, usar archivo
+        serviceAccount = require(path.join(__dirname, 'serviceAccountKey.json'));
+        console.log('Usando credenciales de Firebase desde archivo local');
+      }
+      
       admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
         projectId: "tienda-3e019",
       });
       console.log('Firebase Admin inicializado correctamente');
     } catch (error) {
-      console.error('Error al cargar serviceAccountKey.json:', error.message);
-      console.log('\nPara obtener el archivo de credenciales:');
+      console.error('Error al cargar Firebase:', error.message);
+      console.log('\nPara desarrollo local:');
       console.log('1. Ve a: https://console.firebase.google.com/project/tienda-3e019/settings/serviceaccounts/adminsdk');
       console.log('2. Haz clic en "Generar nueva clave privada"');
       console.log('3. Guarda el archivo como "serviceAccountKey.json" en la carpeta del proyecto');
+      console.log('\nPara producción (Render):');
+      console.log('Agrega FIREBASE_CONFIG como variable de entorno con el contenido del JSON');
       throw error;
     }
     _db = admin.firestore();

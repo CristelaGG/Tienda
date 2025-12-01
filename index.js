@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const app = express();
 const db = require('./db');
 const { getHippieProducts, getColoridoProducts, getGoticoProducts, getMinimalistaProducts, findUserByUsername, createUser, updateProductQuantity, getProductStock } = require('./firebase');
@@ -10,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Configurar sesiones
-app.use(session({
+const sessionConfig = {
   secret: 'tity-creations-secret-2025',
   resave: false,
   saveUninitialized: false,
@@ -18,7 +19,20 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 días
     httpOnly: true
   }
-}));
+};
+
+// Si hay MongoDB URI (producción), usar MongoStore
+if (process.env.MONGODB_URI) {
+  sessionConfig.store = MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    touchAfter: 24 * 3600 // actualizar solo una vez cada 24h
+  });
+  console.log('Usando MongoDB para sesiones');
+} else {
+  console.log('Usando MemoryStore (solo para desarrollo)');
+}
+
+app.use(session(sessionConfig));
 
 // Configurar EJS como motor de vistas
 app.set('view engine', 'ejs');
