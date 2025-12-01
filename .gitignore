@@ -1,2 +1,12 @@
 node_modules
 firebase_key.json
+serviceAccountKey.json
+*.db
+tity.db
+.env
+.env.local
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

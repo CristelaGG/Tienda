@@ -2,12 +2,15 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "firebase": "^12.5.0",
-    "nodemon": "^3.1.10"
+    "firebase-admin": "^13.6.0",
+    "nodemon": "^3.1.10",
+    "sqlite3": "^5.1.7"
   },
   "name": "tity-creations",
   "version": "1.0.0",
-  "description": "",
+  "description": "\"# Tienda\" \r \"# Tienda\" \r \"# Tienda\" \r \"# Tienda\" \r \"# Tienda\"",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
@@ -16,5 +19,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CristelaGG/Tienda.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CristelaGG/Tienda/issues"
+  },
+  "homepage": "https://github.com/CristelaGG/Tienda#readme"
 }

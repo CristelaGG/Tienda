@@ -20,9 +20,14 @@
         </nav>
 
         <div class="icons">
-            <a href="/login">Iniciar sesión</a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <span style="margin-right: 15px; color: #444;">Hola, <%= user.usuario %></span>
+                <a href="/logout" style="margin-right: 10px;">Cerrar sesión</a>
+            <% } else { %>
+                <a href="/login">Iniciar sesión</a>
+            <% } %>
             <span class="icon">👤</span>
-            <span class="icon">🛒</span>
+            <a href="/carrito"><span class="icon">🛒</span></a>
         </div>
     </header>
 
@@ -31,142 +36,40 @@
     <p class="slogan">Gotico</p>  
 </div>
     
-    <!-- Estilos de ropa -->
+    <!-- Estilos de ropa (dinámico) -->
     <section class="styles_c">
-         <!-- Card 1 -->
+      <% if (Array.isArray(products) && products.length) { %>
+        <% products.forEach(function(p) { %>
           <article class="card">
-            <div class="thumb"><img src="/img/blusas.jpg" alt="Articulo 1"></div>
-            <h4 class="title">Blusas goticas</h4>
+            <div class="thumb"><img src="<%= p.imagen %>" alt="<%= p.producto %>"></div>
+            <h4 class="title"><%= p.producto %></h4>
             <div class="meta">
-              <div class="price">$180.00</div>
-              <div class="stock">En stock</div>
+              <div class="price">$<%= Number(p.precio).toFixed(2) %></div>
+              <div class="stock"><%= Number(p.cantidad) > 0 ? 'En stock' : 'Agotado' %></div>
             </div>
             <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
+              <form action="/agregar-carrito" method="POST" style="display: inline;">
+                <input type="hidden" name="producto" value="<%= p.producto %>">
+                <input type="hidden" name="precio" value="<%= p.precio %>">
+                <input type="hidden" name="imagen" value="<%= p.imagen %>">
+                <input type="hidden" name="estilo" value="gotico">
+                <button type="submit" class="small-btn add">Agregar</button>
+              </form>
+              <form action="/comprar-directo" method="POST" style="display: inline;">
+                <input type="hidden" name="producto" value="<%= p.producto %>">
+                <input type="hidden" name="precio" value="<%= p.precio %>">
+                <input type="hidden" name="imagen" value="<%= p.imagen %>">
+                <input type="hidden" name="estilo" value="gotico">
+                <button type="submit" class="small-btn buy">Comprar</button>
+              </form>
             </div>
           </article>
-           <!-- Card 2 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/cinturon.jpg" alt="Articulo 2"></div>
-            <h4 class="title">Cinturon</h4>
-            <div class="meta">
-              <div class="price">$250.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-            <!-- Card 3 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/collar.jpg" alt="Articulo 3"></div>
-            <h4 class="title">Collar</h4>
-            <div class="meta">
-              <div class="price">$190.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-             <!-- Card 4 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/correa_pierna.jpg" alt="Articulo 4"></div>
-            <h4 class="title">Anillos de Pierna</h4>
-            <div class="meta">
-              <div class="price">$145.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-          <!-- Card 5 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/funda_g.jpg" alt="Articulo 5"></div>
-            <h4 class="title">Funda</h4>
-            <div class="meta">
-              <div class="price">$200.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
+        <% }); %>
+      <% } else { %>
+        <p>No hay productos disponibles.</p>
+      <% } %>
     </section>
-
-     <section class="styles_c">
-         <!-- Card 6 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/moño.jpg" alt="Articulo 6"></div>
-            <h4 class="title">Moño</h4>
-            <div class="meta">
-              <div class="price">$85.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-           <!-- Card 7 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/set_g.jpg" alt="Articulo 7"></div>
-            <h4 class="title">Set gotico</h4>
-            <div class="meta">
-              <div class="price">$1250.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-            <!-- Card 8 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/vestido.jpg" alt="Articulo 8"></div>
-            <h4 class="title">Vestido con corset</h4>
-            <div class="meta">
-              <div class="price">$300.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-             <!-- Card 9 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/vestido2.jpg" alt="Articulo 9"></div>
-            <h4 class="title">Vestido victoriano</h4>
-            <div class="meta">
-              <div class="price">$1200.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-          <!-- Card 10 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/vestido3.jpg" alt="Articulo 10"></div>
-            <h4 class="title">Vestido victoriano</h4>
-            <div class="meta">
-              <div class="price">$13000.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-    </section>
+            
 
     <section class="styles_b">
     <article class="card">

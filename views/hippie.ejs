@@ -20,9 +20,14 @@
         </nav>
 
         <div class="icons">
-            <a href="/login">Iniciar sesión</a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <span style="margin-right: 15px; color: #444;">Hola, <%= user.usuario %></span>
+                <a href="/logout" style="margin-right: 10px;">Cerrar sesión</a>
+            <% } else { %>
+                <a href="/login">Iniciar sesión</a>
+            <% } %>
             <span class="icon">👤</span>
-            <span class="icon">🛒</span>
+            <a href="/carrito"><span class="icon">🛒</span></a>
         </div>
     </header>
 
@@ -31,152 +36,50 @@
     <p class="slogan">Hippie</p>  
 </div>
     
-    <!-- Estilos de ropa -->
+    <!-- Estilos de ropa (dinámico) -->
     <section class="styles_c">
-         <!-- Card 1 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/aretes.jpg" alt="Articulo 1"></div>
-            <h4 class="title">Aretes</h4>
-            <div class="meta">
-              <div class="price">$80.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-           <!-- Card 2 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/bolsa.jpg" alt="Articulo 2"></div>
-            <h4 class="title">Bolsa</h4>
-            <div class="meta">
-              <div class="price">$380.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-            <!-- Card 3 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/chaleco.jpg" alt="Articulo 3"></div>
-            <h4 class="title">Chaleco</h4>
-            <div class="meta">
-              <div class="price">$340.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-             <!-- Card 4 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/coliges.jpg" alt="Articulo 4"></div>
-            <h4 class="title">Colige para cabello</h4>
-            <div class="meta">
-              <div class="price">$85.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-          <!-- Card 5 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/collar_h.jpg" alt="Articulo 5"></div>
-            <h4 class="title">Collar</h4>
-            <div class="meta">
-              <div class="price">$200.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-    </section>
+          <% if (Array.isArray(products) && products.length) { %>
+            <% products.forEach(function(p) { %>
+              <article class="card">
+                <div class="thumb"><img src="<%= p.imagen %>" alt="<%= p.producto %>"></div>
+                <h4 class="title"><%= p.producto %></h4>
+                <div class="meta">
+                  <div class="price">$<%= Number(p.precio).toFixed(2) %></div>
+                  <div class="stock"><%= Number(p.cantidad) > 0 ? 'En stock' : 'Agotado' %></div>
+                </div>
+                <div class="actions">
+                  <form action="/agregar-carrito" method="POST" style="display: inline;">
+                    <input type="hidden" name="producto" value="<%= p.producto %>">
+                    <input type="hidden" name="precio" value="<%= p.precio %>">
+                    <input type="hidden" name="imagen" value="<%= p.imagen %>">
+                    <input type="hidden" name="estilo" value="hippie">
+                    <button type="submit" class="small-btn add">Agregar</button>
+                  </form>
+                  <form action="/comprar-directo" method="POST" style="display: inline;">
+                    <input type="hidden" name="producto" value="<%= p.producto %>">
+                    <input type="hidden" name="precio" value="<%= p.precio %>">
+                    <input type="hidden" name="imagen" value="<%= p.imagen %>">
+                    <input type="hidden" name="estilo" value="hippie">
+                    <button type="submit" class="small-btn buy">Comprar</button>
+                  </form>
+                </div>
+              </article>
+            <% }); %>
+          <% } else { %>
+            <p>No hay productos disponibles.</p>
+          <% } %>
+        </section>
 
-     <section class="styles_c">
-         <!-- Card 6 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/faldas.jpg" alt="Articulo 6"></div>
-            <h4 class="title">Faldas</h4>
-            <div class="meta">
-              <div class="price">$160.00 c/u</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-           <!-- Card 7 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/mochila.jpg" alt="Articulo 7"></div>
-            <h4 class="title">Mochila</h4>
-            <div class="meta">
-              <div class="price">$500.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-            <!-- Card 8 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/pantalon_h.jpg" alt="Articulo 8"></div>
-            <h4 class="title">Pantalon</h4>
-            <div class="meta">
-              <div class="price">$200.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-             <!-- Card 9 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/pulceras.jpg" alt="Articulo 9"></div>
-            <h4 class="title">Pulceras</h4>
-            <div class="meta">
-              <div class="price">$60.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-          <!-- Card 10 -->
-          <article class="card">
-            <div class="thumb"><img src="/img/set_h.jpg" alt="Articulo 10"></div>
-            <h4 class="title">Set Hippie</h4>
-            <div class="meta">
-              <div class="price">$1500.00</div>
-              <div class="stock">En stock</div>
-            </div>
-            <div class="actions">
-              <button class="small-btn add">Agregar</button>
-              <button class="small-btn buy">Comprar</button>
-            </div>
-          </article>
-    </section>
-
-    <section class="styles_b">
+        <section class="styles_b">
     <article class="card">
-  <button class="btn-back"><a href="/">← Volver al inicio</a></button>
+  <button class="btn-back"></button><a href="/">← Volver al inicio</a></button>
     </article>
     </section>
 
+    
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Tity Creations. Todos los derechos reservados.</p>
     </footer>
-</body>
+  </body>
 </html>

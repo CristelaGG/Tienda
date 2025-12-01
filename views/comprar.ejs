@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Tity Creations</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/nosotros">Sobre nosotros</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="icons">
+            <% if (typeof user !== 'undefined' && user) { %>
+                <span style="margin-right: 15px; color: #444;">Hola, <%= user.usuario %></span>
+                <a href="/logout" style="margin-right: 10px;">Cerrar sesión</a>
+            <% } else { %>
+                <a href="/login">Iniciar sesión</a>
+            <% } %>
+            <span class="icon">👤</span>
+            <a href="/carrito"><span class="icon">🛒</span></a>
+        </div>
+    </header>
+
+    <div class="logo">
+        <h1>Finalizar Compra</h1>
+        <p class="slogan">Resumen de tu pedido</p>
+    </div>
+
+    <section class="styles_c">
+        <% if (Array.isArray(carrito) && carrito.length > 0) { %>
+            <% carrito.forEach(function(item, index) { %>
+                <article class="card">
+                    <div class="thumb"><img src="<%= item.imagen %>" alt="<%= item.producto %>"></div>
+                    <h4 class="title"><%= item.producto %></h4>
+                    <div class="meta">
+                        <div class="price">$<%= Number(item.precio).toFixed(2) %> x <%= item.cantidad %></div>
+                        <div class="stock">Subtotal: $<%= (item.precio * item.cantidad).toFixed(2) %></div>
+                    </div>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <p style="text-align: center; padding: 40px; font-size: 18px;">No hay productos para comprar</p>
+        <% } %>
+    </section>
+
+    <% if (Array.isArray(carrito) && carrito.length > 0) { %>
+        <section class="styles_b" style="text-align: center; padding: 40px;">
+            <div style="background: #f9f9f9; padding: 30px; border-radius: 10px; max-width: 500px; margin: 0 auto;">
+                <h2 style="color: #333; margin-bottom: 20px;">Total a Pagar</h2>
+                <h1 style="color: #e91e63; font-size: 48px; margin-bottom: 30px;">$<%= total.toFixed(2) %></h1>
+                
+                <form action="/confirmar-compra" method="POST" style="margin-bottom: 15px;">
+                    <button type="submit" class="btn-login" style="width: 100%; padding: 15px; font-size: 18px;">
+                        ✓ Confirmar y Generar Comprobante
+                    </button>
+                </form>
+                
+                <a href="/">
+                    <button class="btn-back" style="width: 100%; padding: 12px;">← Volver al Inicio</button>
+                </a>
+            </div>
+        </section>
+    <% } else { %>
+        <section class="styles_b" style="text-align: center; padding: 30px;">
+            <a href="/">
+                <button class="btn-back" style="width: auto; padding: 12px 30px;">← Volver al inicio</button>
+            </a>
+        </section>
+    <% } %>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Tity Creations. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

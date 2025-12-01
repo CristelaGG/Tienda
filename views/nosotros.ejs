@@ -22,9 +22,14 @@
         </nav>
 
         <div class="icons">
-            <a href="/login">Iniciar sesión</a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <span style="margin-right: 15px; color: #444;">Hola, <%= user.usuario %></span>
+                <a href="/logout" style="margin-right: 10px;">Cerrar sesión</a>
+            <% } else { %>
+                <a href="/login">Iniciar sesión</a>
+            <% } %>
             <span class="icon">👤</span>
-            <span class="icon">🛒</span>
+            <a href="/carrito"><span class="icon">🛒</span></a>
         </div>
     </header>
     <div class="logo">

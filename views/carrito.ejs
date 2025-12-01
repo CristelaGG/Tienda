@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Tity Creations</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/nosotros">Sobre nosotros</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+            </ul>
+        </nav>
+
+        <div class="icons">
+            <% if (typeof user !== 'undefined' && user) { %>
+                <span style="margin-right: 15px; color: #444;">Hola, <%= user.usuario %></span>
+                <a href="/logout" style="margin-right: 10px;">Cerrar sesión</a>
+            <% } else { %>
+                <a href="/login">Iniciar sesión</a>
+            <% } %>
+            <span class="icon">👤</span>
+            <a href="/carrito"><span class="icon">🛒</span></a>
+        </div>
+    </header>
+
+    <div class="logo">
+        <h1>Carrito de Compras</h1>
+    </div>
+
+        <% if (typeof message !== 'undefined' && message) { %>
+            <div class="alert <%= message.type %>"><%= message.text %></div>
+        <% } %>
+
+    <section class="styles_c">
+        <% if (Array.isArray(carrito) && carrito.length > 0) { %>
+            <% carrito.forEach(function(item) { %>
+                <% const safeId = (item.producto || '').toLowerCase().replace(/[^a-z0-9]+/g, '-'); %>
+                <article class="card">
+                    <div class="thumb"><img src="<%= item.imagen %>" alt="<%= item.producto %>"></div>
+                    <h4 class="title"><%= item.producto %></h4>
+                                        <div class="meta">
+                                                <div class="price">$<%= Number(item.precio).toFixed(2) %> c/u</div>
+                                                <div class="stock">
+                                                    <form action="/carrito/actualizar" method="POST" style="display:inline-flex; align-items:center; gap:8px;">
+                                                        <input type="hidden" name="producto" value="<%= item.producto %>">
+                                                        <label for="cantidad_<%= safeId %>">Cantidad:</label>
+                                                        <input id="cantidad_<%= safeId %>" type="number" name="cantidad" min="1" value="<%= item.cantidad %>" style="width:70px; padding:6px;">
+                                                        <button type="submit" class="small-btn" style="padding:6px 12px;">Actualizar</button>
+                                                    </form>
+                                                    <form action="/carrito/eliminar" method="POST" style="display:inline-block; margin-left:10px;">
+                                                        <input type="hidden" name="producto" value="<%= item.producto %>">
+                                                        <button type="submit" class="small-btn" style="background:#f44336; color:#fff; padding:6px 12px;">Eliminar</button>
+                                                    </form>
+                                                </div>
+                                        </div>
+                                        <div class="meta">
+                                                <div class="price">Subtotal: $<%= (item.precio * item.cantidad).toFixed(2) %></div>
+                                        </div>
+                </article>
+            <% }); %>
+        <% } else { %>
+            <p style="text-align: center; padding: 40px; font-size: 18px;">Tu carrito está vacío</p>
+        <% } %>
+    </section>
+
+    <% if (Array.isArray(carrito) && carrito.length > 0) { %>
+        <section class="styles_b" style="text-align: center; padding: 30px;">
+            <h2 style="margin-bottom: 20px;">Total: $<%= total.toFixed(2) %></h2>
+            <form action="/comprar" method="GET" style="display: inline-block; margin-right: 10px;">
+                <button type="submit" class="btn-login" style="width: auto; padding: 12px 30px;">Proceder a Comprar</button>
+            </form>
+            <a href="/" style="display: inline-block;">
+                <button class="btn-back" style="width: auto; padding: 12px 30px;">Seguir Comprando</button>
+            </a>
+        </section>
+    <% } else { %>
+        <section class="styles_b" style="text-align: center; padding: 30px;">
+            <a href="/">
+                <button class="btn-back" style="width: auto; padding: 12px 30px;">← Volver al inicio</button>
+            </a>
+        </section>
+    <% } %>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Tity Creations. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
